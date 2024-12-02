@@ -33,6 +33,11 @@ export default function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
 
+  function restartGame() {
+    setSquares(Array(9).fill(null));
+    setXIsNext(true);
+  }
+
   function handleClick(i) {
     if (squares[i] || calculateWinner(squares)) {
       return;
@@ -49,7 +54,7 @@ export default function Board() {
   if (winner) {
     status = `Winner: ${winner}`;
   } else {
-    status = `Next player: ${xIsNext ? "X" : "O"}`;
+    status = `Player: ${xIsNext ? "X" : "O"}`;
   }
 
   return (
@@ -69,6 +74,11 @@ export default function Board() {
         <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
         <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
         <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
+      </div>
+      <div className="restart">
+        <button
+          className="text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 rounded-lg px-5 py-2.5 my-2 transition duration-500 ease-in-out"
+          onClick={() => restartGame()}>Restart</button>
       </div>
     </>
   );
